@@ -19,13 +19,13 @@ services:
       PHP_SITE_NAME: Elasticsearch Connector
       PHP_HOST_NAME: localhost:8080
       PHP_DOCROOT: docroot # Relative path inside the /var/www/html/ directory.
-      PHP_SENDMAIL_PATH: /go/bin/mhsendmail --smtp-addr mailhog:1025
+      PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
       PHP_XDEBUG_ENABLED: 1 # Set 1 to enable.
       PHP_XDEBUG_AUTOSTART: 1 # Set 1 to enable.
       PHP_XDEBUG_REMOTE_CONNECT_BACK: 0         # Disabled for remote.host to work (enabled by default)
       PHP_XDEBUG_REMOTE_HOST: "10.254.254.254"  # Setting the host (localhost by default)
     volumes:
-      - ./:/var/www/html
+      - ./docroot:/var/www/html/docroot
 
   nginx:
     image: wodby/drupal-nginx
@@ -53,10 +53,18 @@ services:
   mailhog:
     image: mailhog/mailhog
     ports:
-      - "8006:8025"
+      - "8025:8025"
 
   redis:
     image: redis:3.2.4
+
+  memcached:
+    image: memcached:1.4-alpine
+
+  memcached-admin:
+    image: phynias/phpmemcachedadmin
+    ports:
+      - "8084:80"
 
   elasticsearch:
     image: elasticsearch:2.4.1
