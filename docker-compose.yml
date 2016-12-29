@@ -67,10 +67,17 @@ services:
       - "8084:80"
 
   elasticsearch:
-    image: elasticsearch:2.4.1
+    image: elasticsearch:5.1.1
     ports:
      - "9200:9200"
-    command: elasticsearch -Des.node.name="Elasticsearch_Connector"
+    command: elasticsearch -E node.name="Elasticsearch_Connector"
+
+  kibana:
+    image: kibana:5.1.1
+    ports:
+     - "5601:5601"
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
 
   varnish:
     image: wodby/drupal-varnish
