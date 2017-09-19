@@ -14,7 +14,12 @@ Copy or clone this repository into
 `/var/www/drupal-project/`
 
 Run docker compose:
-`cd /var/www/drupal-project; docker-compose up -d;`
+
+`cd /var/www/drupal-project `
+
+`docker run --rm -v $(pwd):/app composer/composer install`
+
+`docker-compose up -d`
 
 Ideally this should setup the all needed services in
 order to have up and running dev environment for 
