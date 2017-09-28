@@ -1,37 +1,74 @@
 {
-    "type": "drupal-project",
-    "license": "GPL-2.0+",
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+    "name": "drupal-composer/drupal-project",
+    "description": "Composer template for Drupal projects",
     "repositories": {
         "drupal": {
             "type": "composer",
-            "url": "https://packages.drupal.org/8"
-        }
-    },
-    "scripts": {
-        "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
-    },
-    "extra": {
-        "packagist.drupal-composer.org": {
-            "discover-make-files": false
-        },
-        "installer-paths": {
-            "web/core": ["type:drupal-core"],
-            "web/modules/contrib/{$name}": ["type:drupal-module"],
-            "web/modules/custom/{$name}": ["type:drupal-custom-module"],
-            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
-            "web/themes/contrib/{$name}": ["type:drupal-theme"],
-            "web/themes/custom/{$name}": ["type:drupal-custom-theme"],
-            "web/libraries/{$name}": ["type:drupal-library"],
-            "web/drush/{$name}": ["type:drupal-drush"]
+            "url": "https://packages.drupal.org/7"
         }
     },
     "require": {
-        "cweagans/composer-patches": "~1.5",
+        "php": ">=5.2.5",
+        "ext-gd": "*",
+        "ext-xml": "*",
+        "ext-json": "*",
+        "ext-openssl": "*",
+        "ext-curl": "*",
+        "ext-pdo": "*",
+        "ext-pdo_mysql": "*",
         "composer/installers": "~1.0",
-        "drupal/core": "8.3.7",
-        "drupal-composer/drupal-scaffold": "~2.0",
-        "drupal/elasticsearch_connector": "~5.0"
+        "cweagans/composer-patches": "^1.6",
+        "derhasi/composer-preserve-paths": "0.1.*",
+        "drush/drush": "~8.0",
+        "drupal/drupal": "7.*",
+        "drupal/composer_autoloader": "1.*"
+    },
+    "conflict": {
+        "drupal/core": "8.*"
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "rm README.md LICENSE .travis.yml phpunit.xml.dist"
+        ]
+    },
+    "config": {
+        "vendor-dir": "vendor"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "installer-paths": {
+            "web/": [
+                "type:drupal-core"
+            ],
+            "web/sites/all/modules/contrib/{$name}/": [
+                "type:drupal-module"
+            ],
+            "web/sites/all/themes/contrib/{$name}/": [
+                "type:drupal-theme"
+            ],
+            "web/sites/all/libraries/{$name}/": [
+                "type:drupal-library"
+            ],
+            "web/sites/all/drush/{$name}/": [
+                "type:drupal-drush"
+            ],
+            "web/profiles/{$name}/": [
+                "type:drupal-profile"
+            ]
+        },
+        "preserve-paths": [
+            "web/sites/all/modules/contrib",
+            "web/sites/all/themes/contrib",
+            "web/sites/all/libraries",
+            "web/sites/all/drush",
+            "web/sites/default/settings.php",
+            "web/sites/default/files"
+        ],
+        "patches": {
+            "drupal/drupal": {
+                "Redirect to install.php": "https://gist.githubusercontent.com/csandanov/72d6e5d9bfd857491a87fa9131e5728c/raw/bff270bea6f5a05779a4fcd5a570dc3e36bb25ca/drupal-7-install-php-redirect.patch"
+            }
+        }
     }
 }
