@@ -44,6 +44,14 @@ services:
     mem_limit: 1g
     ports:
       - "9200:9200"
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.4.2
+    environment:
+      ELASTICSEARCH_URL: http://elastic:9200
+    ports:
+    - "5601:5601"
+    links:
+      - elastic
   mysql:
     image: mysql:5.6
     hostname: localhost
