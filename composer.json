@@ -30,7 +30,7 @@
     "require": {
         "cweagans/composer-patches": "~1.5",
         "composer/installers": "~1.0",
-        "drupal/core": "~8.6",
+        "drupal/core": "~8.7",
         "drupal-composer/drupal-scaffold": "~2.0",
         "drupal/search_api": "~1.10",
         "wikimedia/composer-merge-plugin": "~1.4",
