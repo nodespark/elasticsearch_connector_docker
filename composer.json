@@ -34,7 +34,8 @@
         "drupal-composer/drupal-scaffold": "~2.0",
         "drupal/search_api": "~1.10",
         "wikimedia/composer-merge-plugin": "~1.4",
-        "drupal/elasticsearch_connector": "6.x-dev",
-        "drupal/facets": "~1.1"
+        "drupal/elasticsearch_connector": "7.x-dev",
+        "drupal/facets": "~1.1",
+        "drupal/devel": "^2.1"
     }
 }
